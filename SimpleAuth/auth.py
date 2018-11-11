@@ -29,6 +29,7 @@ def login(request):
         password = request.POST['password']
         user = auth.authenticate(username=username, password=password)
         if user is not None and user.is_active:
+            auth.login(request, user)
             if user.is_staff:
                 return redirect('/admin/home/')
             else:

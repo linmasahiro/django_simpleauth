@@ -12,4 +12,7 @@ def index(request):
     Returns:
         void
     """
-    return render(request, 'admin/index.html')
+    if request.user.is_authenticated and request.user.is_staff:
+        return render(request, 'admin/index.html')
+    else:
+        return redirect('/auth/')
